@@ -1,12 +1,18 @@
 package com.lti.cld.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ProductDTO {
 
-	int productId;
-	String productName;
-	String description;
-	int quantity;
-	int factoryId;
+	private int productId;
+	private String productName;
+	private String description;
+	private int quantity;
+	private MultipartFile image;
+	private int factoryId;
+	private String imageUrl;
+	
+	
 	public int getProductId() {
 		return productId;
 	}
@@ -37,6 +43,19 @@ public class ProductDTO {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public MultipartFile getImage() {
+		return image;
+	}
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	
 	
 	
 	

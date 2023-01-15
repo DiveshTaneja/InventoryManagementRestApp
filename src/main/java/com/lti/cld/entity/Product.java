@@ -16,11 +16,13 @@ public class Product {
 	@Id
 	@GeneratedValue
 	private int productId;
-	
+
 	private String productName;
 	private String description;
 	private int quantity;
-	
+	private String imageName;
+	private String imageURL;
+
 	@ManyToOne
 	@JoinColumn(name = "factory_id")
 	Factory factory;
@@ -40,7 +42,6 @@ public class Product {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-
 
 	public int getQuantity() {
 		return quantity;
@@ -66,6 +67,24 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
+	public String getImageURL() {
+		return imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
+
+
+
 	
 }

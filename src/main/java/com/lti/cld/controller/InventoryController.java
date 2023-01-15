@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -59,26 +60,25 @@ public class InventoryController {
 	}
 
 	// Products API
-	@PostMapping("/add/product")
-	Product addProduct(@RequestBody ProductDTO productdto) {
+	@PostMapping(value="/add/product")
+	Product addProduct(ProductDTO productdto) {
 		Product product = new Product();
 		product.setFactory(inventoryService.getFactoryById(productdto.getFactoryId()));
 		product.setProductName(productdto.getProductName());
 		product.setDescription(productdto.getDescription());
 		product.setQuantity(productdto.getQuantity());
-		return inventoryService.addOrUpdateProduct(product);
+		return inventoryService.addOrUpdateProduct(product,productdto.getImage());
 	}
 
 	@PutMapping("/update/product")
-	Product updateProduct(@RequestBody ProductDTO productdto) {
+	Product updateProduct(ProductDTO productdto) {
 		Product product = new Product();
 		product.setFactory(inventoryService.getFactoryById(productdto.getFactoryId()));
 		product.setProductName(productdto.getProductName());
 		product.setDescription(productdto.getDescription());
 		product.setQuantity(productdto.getQuantity());
-		System.out.println(productdto.getQuantity());
 		product.setProductId(productdto.getProductId());
-		return inventoryService.addOrUpdateProduct(product);
+		return inventoryService.addOrUpdateProduct(product,productdto.getImage());
 	}
 
 	@DeleteMapping("/delete/product/{productId}")
@@ -90,7 +90,7 @@ public class InventoryController {
 	}
 
 	@GetMapping("/viewAll/products/{factoryId}")
-	List<Product> viewALlProducts(@PathVariable int factoryId) {
+	List<ProductDTO> viewALlProducts(@PathVariable int factoryId) {
 		return inventoryService.viewProductsByFactory(factoryId);
 	}
 }

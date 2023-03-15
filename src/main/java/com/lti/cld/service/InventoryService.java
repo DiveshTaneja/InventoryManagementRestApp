@@ -17,7 +17,7 @@ public interface InventoryService {
 	
 	Product addOrUpdateProduct(Product product,MultipartFile image);
 	boolean removeProduct(int productId);
-	Product getProductById(int productId);
+	ProductDTO getProductById(int productId);
 	List<Product> viewAllProducts();
 	List<ProductDTO> viewProductsByFactory(int factoryId);
 

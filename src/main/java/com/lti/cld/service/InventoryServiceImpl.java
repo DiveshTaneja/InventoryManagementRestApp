@@ -93,8 +93,13 @@ public class InventoryServiceImpl implements InventoryService {
 
 	@Override
 	public boolean removeProduct(int productId) {
-		BlobClient blobClient=blobContainerClient.getBlobClient(dao.getProductById(productId).getImageName());
-		blobClient.delete();
+		String imageName= dao.getProductById(productId).getImageName();
+		if(imageName!=null) {
+			BlobClient blobClient=blobContainerClient.getBlobClient(imageName);
+			if(blobClient.exists()) {
+				blobClient.delete();
+			}
+		}
 		return dao.deleteProduct(productId);
 	}
 
@@ -129,8 +134,18 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 
 	@Override
-	public Product getProductById(int productId) {
-		return dao.getProductById(productId);
+	public ProductDTO getProductById(int productId) {
+		Product p= dao.getProductById(productId);
+		ProductDTO temp = new ProductDTO();
+		temp.setImageUrl(p.getImageURL());
+		temp.setDescription(p.getDescription());
+		temp.setFactoryId(p.getFactory().getFactoryId());
+		temp.setProductId(p.getProductId());
+		temp.setProductName(p.getProductName());
+		temp.setQuantity(p.getQuantity());
+		
+		return temp;
+		
 	}
 
 }
